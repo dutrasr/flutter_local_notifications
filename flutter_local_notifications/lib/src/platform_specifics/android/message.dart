@@ -9,7 +9,11 @@ class Message {
     this.person, {
     this.dataMimeType,
     this.dataUri,
-  }) : assert(
+  })  : assert(
+          timestamp != null,
+          'timestamp must be provided',
+        ),
+        assert(
           (dataMimeType == null && dataUri == null) ||
               (dataMimeType != null && dataUri != null),
           'Must provide both dataMimeType and dataUri together or not at all.',
@@ -29,13 +33,13 @@ class Message {
   /// When this is set to `null` the `Person` given to
   /// [MessagingStyleInformation.person] i.e. this would indicate that the
   /// message was sent from the user.
-  final Person? person;
+  final Person person;
 
   /// MIME type for this message context when the [dataUri] is provided.
-  final String? dataMimeType;
+  final String dataMimeType;
 
   /// Uri containing the content.
   ///
   /// The original text will be used if the content or MIME type isn't supported
-  final String? dataUri;
+  final String dataUri;
 }

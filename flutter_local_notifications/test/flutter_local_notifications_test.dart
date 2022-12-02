@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_local_notifications_platform_interface/flutter_local_notifications_platform_interface.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -11,9 +11,15 @@ void main() {
       MockFlutterLocalNotificationsPlugin();
   FlutterLocalNotificationsPlatform.instance = mock;
 
+  test(
+      'Throws assertion error when creating an IOSNotificationAttachment with '
+      'no file path', () {
+    expect(() => IOSNotificationAttachment(null), throwsAssertionError);
+  });
+
   test('Creates IOSNotificationAttachment when file path is specified', () {
-    expect(const DarwinNotificationAttachment(''),
-        isA<DarwinNotificationAttachment>());
+    expect(
+        const IOSNotificationAttachment(''), isA<IOSNotificationAttachment>());
   });
 }
 

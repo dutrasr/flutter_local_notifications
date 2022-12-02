@@ -1,5 +1,6 @@
-import 'package:flutter_local_notifications_platform_interface/flutter_local_notifications_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:flutter_local_notifications_platform_interface/flutter_local_notifications_platform_interface.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -20,7 +21,7 @@ void main() {
       expect(() {
         FlutterLocalNotificationsPlatform.instance =
             ImplementsFlutterLocalNotificationsPlatform();
-      }, throwsAssertionError);
+      }, throwsA(isInstanceOf<AssertionError>()));
     });
 
     test('Can be mocked with `implements`', () {

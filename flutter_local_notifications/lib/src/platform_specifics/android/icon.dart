@@ -1,20 +1,12 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
-import 'enums.dart';
-
 /// Represents an icon on Android.
-abstract class AndroidIcon<T> {
+abstract class AndroidIcon {
   /// The location to the icon;
-  T get data;
-
-  /// The subclass source type
-  AndroidIconSource get source;
+  String get icon;
 }
 
 /// Represents a drawable resource belonging to the Android application that
 /// should be used as an icon on Android.
-class DrawableResourceAndroidIcon implements AndroidIcon<String> {
+class DrawableResourceAndroidIcon implements AndroidIcon {
   /// Constructs an instance of [DrawableResourceAndroidIcon].
   const DrawableResourceAndroidIcon(this._icon);
 
@@ -24,15 +16,12 @@ class DrawableResourceAndroidIcon implements AndroidIcon<String> {
   ///
   /// For example if the drawable resource is located at `res/drawable/app_icon.png`, the icon should be `app_icon`
   @override
-  String get data => _icon;
-
-  @override
-  AndroidIconSource get source => AndroidIconSource.drawableResource;
+  String get icon => _icon;
 }
 
 /// Represents a file path to a bitmap that should be used for as an icon on
 /// Android.
-class BitmapFilePathAndroidIcon implements AndroidIcon<String> {
+class BitmapFilePathAndroidIcon implements AndroidIcon {
   /// Constructs an instance of [BitmapFilePathAndroidIcon].
   const BitmapFilePathAndroidIcon(this._icon);
 
@@ -40,14 +29,11 @@ class BitmapFilePathAndroidIcon implements AndroidIcon<String> {
 
   /// A file path on the Android device that refers to the location of the icon.
   @override
-  String get data => _icon;
-
-  @override
-  AndroidIconSource get source => AndroidIconSource.bitmapFilePath;
+  String get icon => _icon;
 }
 
 /// Represents a content URI that should be used for as an icon on Android.
-class ContentUriAndroidIcon implements AndroidIcon<String> {
+class ContentUriAndroidIcon implements AndroidIcon {
   /// Constructs an instance of [ContentUriAndroidIcon].
   const ContentUriAndroidIcon(this._icon);
 
@@ -55,15 +41,12 @@ class ContentUriAndroidIcon implements AndroidIcon<String> {
 
   /// A content URI that refers to the location of the icon.
   @override
-  String get data => _icon;
-
-  @override
-  AndroidIconSource get source => AndroidIconSource.contentUri;
+  String get icon => _icon;
 }
 
 /// Represents a bitmap asset belonging to the Flutter application that should
 /// be used for as an icon on Android.
-class FlutterBitmapAssetAndroidIcon implements AndroidIcon<String> {
+class FlutterBitmapAssetAndroidIcon implements AndroidIcon {
   /// Constructs an instance of [FlutterBitmapAssetAndroidIcon].
   const FlutterBitmapAssetAndroidIcon(this._icon);
 
@@ -81,28 +64,5 @@ class FlutterBitmapAssetAndroidIcon implements AndroidIcon<String> {
   ///
   /// then the path to the asset would be `icons/coworker.png`.
   @override
-  String get data => _icon;
-
-  @override
-  AndroidIconSource get source => AndroidIconSource.flutterBitmapAsset;
-}
-
-/// Represents a bitmap asset belonging to the Flutter application that should
-/// be used for as an icon on Android.
-class ByteArrayAndroidIcon implements AndroidIcon<Uint8List> {
-  /// Constructs an instance of [FlutterBitmapAssetAndroidIcon].
-  const ByteArrayAndroidIcon(this._icon);
-
-  /// Constructs an instance of [ByteArrayAndroidIcon] from a base64 string.
-  factory ByteArrayAndroidIcon.fromBase64String(String base64Image) =>
-      ByteArrayAndroidIcon(base64Decode(base64Image));
-
-  final Uint8List _icon;
-
-  /// Byte array data of the icon.
-  @override
-  Uint8List get data => _icon;
-
-  @override
-  AndroidIconSource get source => AndroidIconSource.byteArray;
+  String get icon => _icon;
 }

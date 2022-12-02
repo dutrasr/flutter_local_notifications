@@ -66,10 +66,4 @@ enum DateTimeComponents {
 
   /// The day of the week and time.
   dayOfWeekAndTime,
-
-  /// The day of the month and time.
-  dayOfMonthAndTime,
-
-  /// The date and time.
-  dateAndTime,
 }
